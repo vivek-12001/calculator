@@ -1,16 +1,23 @@
+
 pipeline {
-     agent any
-     stages {
-        stage("Build") {
-            steps {
-                sh "sudo npm install"
-                sh "sudo npm run build"
-            }
-        }
-        stage("Build") {
-            steps {
-                sh "sudo npm run test -- --watchAll=false"
-            }
-        }
+  agent any
+    
+  tools {nodejs "node"}
+    
+  stages {
+     
+    stage('Build') {
+      steps {
+        sh 'npm install'
+         sh 'npm run build'
+      }
+    }  
+    
+            
+    stage('Test') {
+      steps {
+        sh 'npm run test --watchAll=false'
+      }
     }
+  }
 }
